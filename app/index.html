@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>VICE CITY NIGHTS — Five-Panel Real-Photo Cover Maker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">VCN</span>
+    <div><h1>VICE CITY NIGHTS</h1><p>Five-panel story cover maker — real photos only, no 3D</p></div>
+  </div>
+  <div class="grade-flip" role="group" aria-label="Grade flip">
+    <span class="grade-label">GRADE</span>
+    <button id="grade-day" class="grade-btn active" type="button">☀ DAY · golden hour</button>
+    <button id="grade-night" class="grade-btn" type="button">🌙 NIGHT · neon</button>
+  </div>
+</header>
+
+<main class="editor">
+  <section class="stage-col">
+    <div class="stage-wrap" id="stage-wrap">
+      <canvas id="cover-canvas" width="1280" height="720" aria-label="Live cover preview"></canvas>
+      <div class="stage-hint" id="stage-hint">Click a panel to select it · drag to pan · scroll to zoom</div>
+    </div>
+    <div class="samples-bar" id="samples-bar" aria-label="Sample photos"></div>
+    <div class="dropzone" id="dropzone">
+      <span>Drop your own photos here, or</span>
+      <label class="upload-btn" for="photo-upload">Upload a photo</label>
+      <input id="photo-upload" type="file" accept="image/*" multiple hidden>
+      <span class="drop-note">Photos stay on your machine — never uploaded.</span>
+    </div>
+  </section>
+
+  <aside class="controls">
+    <section class="panel-box">
+      <h2>1 · Layout — one night in Vice City</h2>
+      <div class="layout-row" id="layout-row">
+        <button data-layout="story" class="layout-btn active" type="button">Story · 5-panel</button>
+        <button data-layout="hero-stack" class="layout-btn" type="button">Hero + Stack</button>
+        <button data-layout="grid" class="layout-btn" type="button">3 × 3 Grid</button>
+        <button data-layout="polaroid" class="layout-btn" type="button">Polaroid Tilt</button>
+        <button data-layout="slices" class="layout-btn" type="button">Slices</button>
+      </div>
+      <p class="help">Story is the default: one big hero chase, three story beats, a case-file footer.</p>
+    </section>
+
+    <section class="panel-box">
+      <h2>2 · Selected panel <span id="selected-name" class="sel-name">HERO CHASE</span></h2>
+      <div class="field-row">
+        <label>Photo <select id="panel-photo"></select></label>
+        <label>Grade <select id="panel-grade">
+          <option value="auto">Auto (follows flip)</option>
+          <option value="day">Day golden-hour</option>
+          <option value="night">Night neon</option>
+          <option value="none">None — as shot</option>
+        </select></label>
+      </div>
+      <label class="slider-label">Zoom <input id="panel-zoom" type="range" min="1" max="2.5" step="0.01" value="1"> <span id="zoom-val">1.00×</span></label>
+      <div class="btn-row">
+        <button id="fill-all" class="mini-btn" type="button">Fill all panels with this photo</button>
+        <button id="reset-panel" class="mini-btn" type="button">Reset crop</button>
+      </div>
+      <label class="check"><input id="poster-ink" type="checkbox"> Poster Ink halftone (optional)</label>
+      <label class="slider-label">Ink strength <input id="poster-amt" type="range" min="0" max="1" step="0.05" value="0.5"></label>
+    </section>
+
+    <section class="panel-box">
+      <h2>3 · Caption lettering</h2>
+      <label class="field">Title <input id="cap-title" type="text" value="BRINEHAVEN" maxlength="16"></label>
+      <label class="field">Script subtitle <input id="cap-script" type="text" value="Tide City Nights" maxlength="28"></label>
+      <label class="field">Tagline band <input id="cap-tagline" type="text" value="THE TIDE DECIDES THE ROADS" maxlength="48"></label>
+      <label class="field">Case-file footer <input id="cap-footer" type="text" value="CASE 07 — THE GULLWING JOB · HARBOUR WARDENS ON THE TAIL · BRINE FM 91.4" maxlength="90"></label>
+      <div class="field-row">
+        <label class="field">Stars <input id="cap-stars" type="range" min="0" max="5" step="0.5" value="4.5"> <span id="stars-val">4.5 ★</span></label>
+        <label class="field">Starburst badge <input id="cap-badge" type="text" value="TIDE RUNS 2026" maxlength="18"></label>
+      </div>
+    </section>
+
+    <section class="panel-box export-box">
+      <h2>4 · Export PNG — one click</h2>
+      <div class="export-row">
+        <button id="export-landscape" class="export-btn" type="button">1920 × 1080<br><span>landscape</span></button>
+        <button id="export-square" class="export-btn" type="button">1080 × 1080<br><span>square</span></button>
+        <button id="export-portrait" class="export-btn" type="button">1080 × 1350<br><span>portrait</span></button>
+      </div>
+      <p class="status" id="export-status">Ready — the preview is the cover. Export draws it fresh at full size.</p>
+    </section>
+  </aside>
+</main>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
